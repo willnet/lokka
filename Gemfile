@@ -42,6 +42,8 @@ end
 
 group :development do
   gem 'tapp', '1.3.0'
+  gem 'pry'
+  gem 'pry-remote'
 end
 
 group :test do
