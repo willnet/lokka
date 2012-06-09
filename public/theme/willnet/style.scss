@@ -1,0 +1,46 @@
+.social_btn {
+  width: 460px;
+  &:after {
+    content:"";
+    display:block;
+    overflow:hidden;
+    clear:both;
+  }
+  .hatena {
+    display: inline;
+    float: left;
+    width: 60px;
+  }
+
+  .twitter {
+    display: inline;
+    float: left;
+    width: 100px;
+  }
+
+  .facebook {
+    display: inline;
+    float: left;
+    width: 120px;
+  }
+}
+
+pre {
+  padding: 15px 20px;
+  background-color: #232323;
+  font-size: 13px;
+  font-family: monospace;
+  line-height: 1.20;
+  color: #E6E0DB;
+  overflow: auto;
+
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+}
+
+pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}

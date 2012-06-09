@@ -1,0 +1,28 @@
+%article
+  %h2
+    %a{:href => @entry.link}
+      =@entry.title
+  %div.body~ @entry.body
+  %div.social_btn
+    %div.hatena
+      %a{:href => "http://b.hatena.ne.jp/entry#{@entry.link}",
+         :class => "hatena-bookmark-button",
+         :"data-hatena-bookmark-title" => "#{@entry.title} - #{@site.title}",
+         :"data-hatena-bookmark-layout" => "standard",
+         :title => "このエントリーをはてなブックマークに追加"}
+        %img{:src => "http://b.st-hatena.com/images/entry-button/button-only.gif", :alt => "このエントリーをはてなブックマークに追加", :width => "20", :height => "20", :style => "border: none;"}
+    %div.twitter      
+      %a{:href => "https://twitter.com/share",
+         :class => "twitter-share-button",
+         :"data-url" => "http://willnet.in#{@entry.link}",
+         :"data-text" => "#{@entry.title} - #{@site.title}",
+         :"data-via" => "netwillnet",
+         :"data-lang" =>"ja"}
+        ツイート
+    %div.facebook
+      %div{:class => "fb-like",
+           :"data-href" => "http://willnet.in#{@entry.link}",
+           :"data-send" => "false",
+           :"data-layout" => "button_count",
+           :"data-width" => "450",
+           :"data-show-faces" => "true"}
