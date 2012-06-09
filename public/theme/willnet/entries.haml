@@ -27,3 +27,12 @@
              :"data-layout" => "button_count",
              :"data-width" => "450",
              :"data-show-faces" => "true"}
+%div.pager
+  - if @posts.pager.previous_page
+    %span.previous
+      %a{:href => "?page=#{@posts.pager.previous_page}"}
+        Newer
+  - if @posts.pager.next_page
+    %span.next
+      %a{:href => "?page=#{@posts.pager.next_page}"}
+        Older
