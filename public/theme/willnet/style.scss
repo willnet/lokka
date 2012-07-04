@@ -1,10 +1,18 @@
-div#container {
-  margin: 0 auto;
-  width: 1000px;
-}
-
 div.pager {
   margin: 20px 0;
+}
+
+h2 {
+  margin: 10px 0;
+}
+
+body {
+  font-family: Lucida Grande,Lucida Sans Unicode;
+  padding-top: 40px;
+}
+
+div#info {
+  margin: 15px 0 0 0;
 }
 
 .social_btn {
@@ -32,24 +40,4 @@ div.pager {
     float: left;
     width: 120px;
   }
-}
-
-pre {
-  padding: 15px 20px;
-  background-color: #232323;
-  font-size: 13px;
-  font-family: monospace;
-  line-height: 1.20;
-  color: #E6E0DB;
-  overflow: auto;
-
-  border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-}
-
-pre {
-    white-space: pre;
-    white-space: pre-wrap;
-    word-wrap: break-word;
 }

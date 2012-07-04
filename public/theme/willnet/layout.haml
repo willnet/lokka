@@ -1,19 +1,25 @@
 !!!
-%html
+%html{lang: "ja"}
   %head
-    %meta{:charset =>"UTF-8"}
+    %meta{charset: "UTF-8"}
     - if entry?
       %title= "#{@entry.title} - #{@site.title}"
     - else
       %title= @site.title
-    %link{:rel => "alternate", :href => "/index.atom", :type => "application/atom+xml"}
-    %link{:rel => "shortcut icon", :href => "#{@theme.path}/favicon.ico"}
-    %link{:rel => "stylesheet",
-          :href => "#{@theme.path}/style.css",
-          :type => "text/css"}
-    %script{:type => "text/javascript",
-            :src => "http://s.hatena.ne.jp/js/HatenaStar.js"}
-    %script{:type => "text/javascript"}
+    %link{rel: "alternate", href: "/index.atom", type: "application/atom+xml"}
+    %link{rel: "shortcut icon", href: "#{@theme.path}/favicon.ico"}
+    %link{rel: "stylesheet",
+          href: "#{@theme.path}/css/bootstrap.min.css",
+          type: "text/css"}
+    %link{rel: "stylesheet",
+          href: "#{@theme.path}/style.css",
+          type: "text/css"}
+    %link{rel: "stylesheet",
+          href: "#{@theme.path}/css/bootstrap-responsive.min.css",
+          type: "text/css"}
+    %script{type: "text/javascript",
+            src: "http://s.hatena.ne.jp/js/HatenaStar.js"}
+    %script{type: "text/javascript"}
       Hatena.Star.Token = '1509a63676578c07e2c82ee86c136049078c6565';
       Hatena.Star.SiteConfig = {
       entryNodes: {
@@ -26,7 +32,7 @@
       };
     = header
   %body
-    %div{:id => "fb-root"}
+    %div#fb-root
     %script
       (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -35,12 +41,47 @@
       js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=278816705549331";
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    %div#container
-      %h1
-        %a{:href => '/'}= @site.title
-      %p= @site.description
-      = yield
+    %div{class: 'navbar navbar-fixed-top'}
+      %div.navbar-inner
+        %div.container
+          %a.brand{href: '/'}= @site.title
+          %form.navbar-search{class: 'pull-right', action: "/search/", method: "get"}
+            %input.search-query{type: "text", name: "query", placeholder: "search"}
+          - Page.all.each do |page|
+            %ul.nav
+              - if page.link == request_path
+                %li.active= link_to(page.title, page.link)
+              - else
+                %li= link_to(page.title, page.link)
+    %div.container
+      %div.row
+        %div.span9
+          = yield
+        %div.span3
+          %div#info
+            %img{src: 'http://www.gravatar.com/avatar/6ac7c50770603b53964d44db373e8e48?s=150'}
+            %p= @site.description
+          %h2 最近のエントリ
+          %ul
+            - Post.recent(5).each do |post|
+              %li
+                %a{href: post.link}
+                  = post.title
+          %h2 タグ
+          %ul
+            - Tag.all.each do |tag|
+              %li
+                %a{href: tag.link}
+                  = tag.name
+          %h2 アーカイブ
+          %ul
+            - months.each do |month|
+              %li
+                %a{href: "/#{month.year}/#{month.month}/"}
+                  = "#{month.year}/#{month.month}"
     %script{:type => "text/javascript", :src => "http://b.st-hatena.com/js/bookmark_button.js", :charset => "utf-8", :async => "async"}
     %script
       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+    %script{:type => "text/javascript",
+            :src => "#{@theme.path}/js/bootstrap.min.js"}
     = footer

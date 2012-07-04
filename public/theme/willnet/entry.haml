@@ -1,7 +1,8 @@
 %article
-  %h2
-    %a{:href => @entry.link}
-      =@entry.title
+  %div.page-header
+    %h1
+      %a{:href => @entry.link}
+        =@entry.title
   %div.body~ @entry.body
   %div.social_btn
     %div.hatena
@@ -26,3 +27,39 @@
            :"data-layout" => "button_count",
            :"data-width" => "450",
            :"data-show-faces" => "true"}
+  %h2 コメント
+  %div.comment
+    - @entry.comments.reverse.each do |comment|
+      %div.well
+        = link_to comment.name, comment.homepage, :unless => comment.homepage.blank?
+        %p= hbr comment.body
+        %div.date= l comment.created_at, :format => :long
+  %div#comment-form
+    - if @comment and !@comment.errors.empty?
+      #error
+        .title= t('error')
+        %ul
+          - @comment.errors.each do |error|
+            %li= error
+    - form_for @comment, request.path_info, :method => :post, :class => 'form-horizontal' do |f|
+      :javascript
+        document.write('<input type="hidden" name="check" value="check" />');
+      %fieldset
+        %legend コメントを書く
+        %div.control-group
+          = f.label :name, :caption => t('comment.name'), :class => 'control-label'
+          %div.controls
+            = f.text_field :name, class: 'input-xlarge'
+        %div.control-group
+          = f.label :homepage, :caption => t('comment.homepage'), :class => 'control-label'
+
+          %div.controls
+            = f.text_field :homepage, :class => 'input-xlarge'
+            %span.help-inline== (#{t('option')})
+        %div.control-group
+          = f.label :body, :caption => t('comment.body'), :class => 'control-label'
+          %div.controls
+            = f.text_area :body, :rows => 10, :cols => 40, :class => 'input-xlarge'
+      %div.form-actions
+        = f.submit t('post_comment'), :class => 'btn'
+

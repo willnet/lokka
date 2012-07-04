@@ -1,8 +1,9 @@
 - @posts.each do |post|
   %article
-    %h2
-      %a{:href => post.link}
-        =post.title
+    %div.page-header
+      %h1
+        %a{:href => post.link}
+          =post.title
     %div.body~ post.body
     %div.social_btn
       %div.hatena
