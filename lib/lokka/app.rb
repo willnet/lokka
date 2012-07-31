@@ -20,6 +20,8 @@ module Lokka
       set :theme => Proc.new { File.join(public_folder, 'theme') }
       set :supported_templates => %w(erb haml slim erubis)
       set :supported_stylesheet_templates => %w(scss sass)
+      set :scss, Compass.sass_engine_options
+      set :sass, Compass.sass_engine_options
       set :per_page, 10
       set :admin_per_page, 200
       set :default_locale, 'en'
@@ -33,7 +35,7 @@ module Lokka
       use Rack::Session::Cookie,
         :expire_after => 60 * 60 * 24 * 12
       set :session_secret, 'development' if development?
-      use Rack::Flash
+      register Sinatra::Flash
       Lokka.load_plugin(self)
       Lokka::Database.new.connect
     end
@@ -66,7 +68,7 @@ module Lokka
 
     get '/*.css' do |path|
       content_type 'text/css', :charset => 'utf-8'
-      render_any path.to_sym
+      render_any path.to_sym, :views => settings.views
     end
 
     run! if app_file == $0

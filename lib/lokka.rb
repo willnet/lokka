@@ -18,6 +18,10 @@ module Lokka
       File.expand_path('..', File.dirname(__FILE__))
     end
 
+    def admin_theme_dir
+      File.expand_path("#{self.root}/public/admin")
+    end
+
     ##
     # Data Source Name
     #
@@ -100,8 +104,8 @@ end
 require 'active_support/all'
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'sinatra/flash'
 require 'padrino-helpers'
-require 'rack/flash'
 require 'dm-core'
 require 'dm-timestamps'
 require 'dm-migrations'
@@ -116,6 +120,7 @@ require 'redcloth'
 require 'wikicloth'
 require 'haml'
 require 'sass'
+require 'compass'
 require 'slim'
 require 'builder'
 require 'nokogiri'
