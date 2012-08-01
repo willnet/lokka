@@ -33,7 +33,7 @@
       %div.well
         = link_to comment.name, comment.homepage, :unless => comment.homepage.blank?
         %p= hbr comment.body
-        %div.date= l comment.created_at, :format => :long
+        %div.date= l(comment.created_at, :format => :long)
   %div#comment-form
     - if @comment and !@comment.errors.empty?
       #error

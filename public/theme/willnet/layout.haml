@@ -9,32 +9,15 @@
       %title= @site.title
     %link{rel: "alternate", href: "/index.atom", type: "application/atom+xml"}
     %link{rel: "shortcut icon", href: "#{@theme.path}/favicon.ico"}
-    %link{rel: "stylesheet",
-          href: "#{@theme.path}/css/bootstrap.min.css",
-          type: "text/css"}
-    %link{rel: "stylesheet",
-          href: "#{@theme.path}/style.css",
-          type: "text/css"}
-    %link{rel: "stylesheet",
-          href: "#{@theme.path}/css/bootstrap-responsive.min.css",
-          type: "text/css"}
-    %script{type: "text/javascript",
-            src: "http://s.hatena.ne.jp/js/HatenaStar.js"}
-    %script{type: "text/javascript"}
-      Hatena.Star.Token = '1509a63676578c07e2c82ee86c136049078c6565';
-      Hatena.Star.SiteConfig = {
-      entryNodes: {
-      'article': {
-      uri: 'h2 a',
-      title: 'h2',
-      container: 'h2'
-      }
-      }
-      };
+    %link{rel: "stylesheet", href: "#{@theme.path}/css/bootstrap.min.css"}
+    %link{rel: "stylesheet", href: "#{@theme.path}/style.css"}
+    %link{rel: "stylesheet", href: "#{@theme.path}/css/bootstrap-responsive.min.css"}
+    %script{src: "//s.hatena.ne.jp/js/HatenaStar.js"}
+    %script{src: "#{@theme.path}/js/hatena_star.js"}
     = header
   %body
     %div#fb-root
-    %script
+    :javascript
       (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
@@ -85,13 +68,10 @@
               %li
                 %a{href: "/#{month.year}/#{month.month}/"}
                   = "#{month.year}/#{month.month}"
-    %script{:type => "text/javascript", :src => "http://b.st-hatena.com/js/bookmark_button.js", :charset => "utf-8", :async => "async"}
-    %script
+    %script{src: "//b.st-hatena.com/js/bookmark_button.js", charset: "utf-8", async: "async"}
+    :javascript
       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-    %script{:type => "text/javascript",
-            :src => "#{@theme.path}/js/jquery-1.7.2.min.js"}
-    %script{:type => "text/javascript",
-            :src => "#{@theme.path}/js/bootstrap.min.js"}
-    %script{:type => "text/javascript",
-            :src => "#{@theme.path}/js/design.js"}
+    %script{src: "#{@theme.path}/js/jquery-1.7.2.min.js"}
+    %script{src: "#{@theme.path}/js/bootstrap.min.js"}
+    %script{src: "#{@theme.path}/js/design.js"}
     = footer
