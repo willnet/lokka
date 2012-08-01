@@ -45,15 +45,20 @@
     %div{class: 'navbar navbar-fixed-top'}
       %div.navbar-inner
         %div.container
+          %a{'class' => "btn btn-navbar", 'data-toggle' => "collapse", 'data-target' => ".nav-collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
           %a.brand{href: '/'}= @site.title
-          %form.navbar-search{class: 'pull-right', action: "/search/", method: "get"}
-            %input.search-query{type: "text", name: "query", placeholder: "search"}
-          - Page.all.each do |page|
-            %ul.nav
-              - if page.link == request_path
-                %li.active= link_to(page.title, page.link)
-              - else
-                %li= link_to(page.title, page.link)
+          %div.nav-collapse
+            %form.navbar-search{class: 'pull-right', action: "/search/", method: "get"}
+              %input.search-query{type: "text", name: "query", placeholder: "search"}
+            - Page.all.each do |page|
+              %ul.nav
+                - if page.link == request_path
+                  %li.active= link_to(page.title, page.link)
+                - else
+                  %li= link_to(page.title, page.link)
     %div.container
       %div.row
         %div.span9
@@ -84,5 +89,9 @@
     %script
       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
     %script{:type => "text/javascript",
+            :src => "#{@theme.path}/js/jquery-1.7.2.min.js"}
+    %script{:type => "text/javascript",
             :src => "#{@theme.path}/js/bootstrap.min.js"}
+    %script{:type => "text/javascript",
+            :src => "#{@theme.path}/js/design.js"}
     = footer
