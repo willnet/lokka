@@ -27,8 +27,12 @@
            :"data-layout" => "button_count",
            :"data-width" => "450",
            :"data-show-faces" => "true"}
-  %h2 コメント
-  %div.comment
+  %div.post_info
+    = link_to("#{t('comments')}(#{@entry.comments.size})", url("#{@entry.link}#comment"))
+    |
+    = l(@entry.created_at)
+  %div#comment
+    %h2 コメント
     - @entry.comments.reverse.each do |comment|
       %div.well
         = link_to comment.name, comment.homepage, :unless => comment.homepage.blank?
@@ -36,10 +40,10 @@
         %div.date= l(comment.created_at, :format => :long)
   %div#comment-form
     - if @comment and !@comment.errors.empty?
-      #error
-        .title= t('error')
+      .alert.alert-error
+        %h4.alert-heading= t('error')
         %ul
-          - @comment.errors.each do |error|
+          - @comment.errors.full_messages.each do |error|
             %li= error
     - form_for :comment, request.path_info, method: :post, class: 'form-horizontal' do |f|
       :javascript

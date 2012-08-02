@@ -14,12 +14,18 @@ article {
   margin: 15px 0;
 }
 
+.navbar {
+  .brand {
+    padding: 8px 20px 12px 0px;
+  }
+  .container a {
+    margin: 5px 0;
+  }
+}
 
 body {
   font-family: Lucida Grande,Lucida Sans Unicode;
-  font-size: 16px;
-  line-height: 28px;
-  padding-top: 40px;
+  padding-top: 45px;
 }
 
 div#info {
@@ -27,7 +33,8 @@ div#info {
 }
 
 .social_btn {
-  width: 460px;
+  width: 100%;
+  margin: 10px 0;
   &:after {
     content:"";
     display:block;
@@ -51,4 +58,7 @@ div#info {
     float: left;
     width: 120px;
   }
+}
+.post_info {
+  float: right;
 }

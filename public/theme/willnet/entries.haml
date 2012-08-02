@@ -29,6 +29,10 @@
              :"data-layout" => "button_count",
              :"data-width" => "450",
              :"data-show-faces" => "true"}
+    %div.post_info
+      = link_to("#{t('comments')}(#{post.comments.size})", url("#{post.link}#comment"))
+      |
+      = l(post.created_at)
 %div.pager
   - if @posts.pager.previous_page
     %span.previous
