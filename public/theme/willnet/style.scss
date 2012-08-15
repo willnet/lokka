@@ -42,10 +42,10 @@ div#info {
   width: 100%;
   margin: 10px 0;
   &:after {
-    content:"";
-    display:block;
-    overflow:hidden;
-    clear:both;
+    content: "";
+    display: block;
+    overflow: hidden;
+    clear: both;
   }
   .hatena {
     display: inline;
@@ -66,7 +66,7 @@ div#info {
   }
 }
 .post_info {
-  float: right;
+  text-align: right;
   ul {
     display: inline;
   }
@@ -75,4 +75,8 @@ div#info {
     list-style: none;
     margin-right: 5px;
   }
+}
+
+#disqus_thread {
+  margin-top: 10px;
 }

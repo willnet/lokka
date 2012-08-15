@@ -31,8 +31,6 @@
     - if @entry.tags.size > 0
       = @entry.tags_to_html
       |
-    = comments_link(@entry.id, @entry.link)
-    |
     = l(@entry.created_at)
   = comment_form 
 
