@@ -17,7 +17,7 @@
     %script{src: "#{@theme.path}/js/hatena_star.js"}
     = header
   %body
-    %div#fb-root
+    #fb-root
     :javascript
       (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -26,15 +26,15 @@
       js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=278816705549331";
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    %div{class: 'navbar navbar-fixed-top'}
-      %div.navbar-inner
-        %div.container
-          %a{'class' => "btn btn-navbar", 'data-toggle' => "collapse", 'data-target' => ".nav-collapse"}
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{'data-toggle' => "collapse", 'data-target' => ".nav-collapse"}
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
           %a.brand{href: '/'}= @site.title
-          %div.nav-collapse
+          .nav-collapse
             %form.navbar-search{class: 'pull-right', action: "/search/", method: "get"}
               %input.search-query{type: "text", name: "query", placeholder: "search"}
             %ul.nav
@@ -49,12 +49,12 @@
                 %a{href: 'http://twitter.com/netwillnet'} twitter
 
                 
-    %div.container
-      %div.row
-        %div.span9
+    .container
+      .row
+        .span9
           = yield
-        %div.span3
-          %div#info
+        .span3
+          #info
             %img{src: 'http://www.gravatar.com/avatar/6ac7c50770603b53964d44db373e8e48?s=150'}
             %p= @site.description
           %h2 最近のエントリ
