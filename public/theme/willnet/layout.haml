@@ -37,13 +37,18 @@
           %div.nav-collapse
             %form.navbar-search{class: 'pull-right', action: "/search/", method: "get"}
               %input.search-query{type: "text", name: "query", placeholder: "search"}
-            - if Page.count > 0
-              %ul.nav
-                - Page.all.each do |page|
-                  - if page.link == request_path
-                    %li.active= link_to(page.title, page.link)
-                  - else
-                    %li= link_to(page.title, page.link)
+            %ul.nav
+              - Page.all.each do |page|
+                - if page.link == request_path
+                  %li.active= link_to(page.title, page.link)
+                - else
+                  %li= link_to(page.title, page.link)
+              %li
+                %a{href: 'http://github.com/willnet'} github
+              %li
+                %a{href: 'http://twitter.com/netwillnet'} twitter
+
+                
     %div.container
       %div.row
         %div.span9
