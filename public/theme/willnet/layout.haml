@@ -65,7 +65,7 @@
                 %a{href: post.link}
                   = post.title
           %h2 タグ
-          %ul
+          %ul.nav.nav-pills
             - Tag.all.each do |tag|
               %li
                 %a{href: tag.link}
