@@ -33,7 +33,7 @@
       - if post.tags.size > 0
         = post.tags_to_html
         |
-      = link_to("#{t('comments')}(#{post.comments.size})", url("#{post.link}#comment"))
+      = comments_link(post.id, post.link)
       |
       = l(post.created_at)
 .pager

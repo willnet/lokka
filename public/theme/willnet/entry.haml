@@ -31,42 +31,8 @@
     - if @entry.tags.size > 0
       = @entry.tags_to_html
       |
-    = link_to("#{t('comments')}(#{@entry.comments.size})", url("#{@entry.link}#comment"))
+    = comments_link(@entry.id, @entry.link)
     |
     = l(@entry.created_at)
-  #comment
-    %h2 コメント
-    - @entry.comments.reverse.each do |comment|
-      .well
-        = link_to comment.name, comment.homepage, :unless => comment.homepage.blank?
-        %p= hbr comment.body
-        .date= l(comment.created_at, :format => :long)
-  #comment-form
-    - if @comment and !@comment.errors.empty?
-      .alert.alert-error
-        %h4.alert-heading= t('error')
-        %ul
-          - @comment.errors.full_messages.each do |error|
-            %li= error
-    - form_for :comment, request.path_info, method: :post, class: 'form-horizontal' do |f|
-      :javascript
-        document.write('<input type="hidden" name="check" value="check" />');
-      %fieldset
-        %legend コメントを書く
-        .control-group
-          = f.label :name, :caption => t('comment.name'), :class => 'control-label'
-          .controls
-            = f.text_field :name, class: 'input-xlarge'
-        .control-group
-          = f.label :homepage, :caption => t('comment.homepage'), :class => 'control-label'
-
-          .controls
-            = f.text_field :homepage, :class => 'input-xlarge'
-            %span.help-inline== (#{t('option')})
-        .control-group
-          = f.label :body, :caption => t('comment.body'), :class => 'control-label'
-          .controls
-            = f.text_area :body, :rows => 10, :cols => 40, :class => 'input-xlarge'
-      .form-actions
-        = f.submit t('post_comment'), :class => 'btn'
+  = comment_form 
 
