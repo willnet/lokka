@@ -28,6 +28,9 @@
            :"data-width" => "120",
            :"data-show-faces" => "true"}
   .post_info
+    - if @entry.tags.size > 0
+      = @entry.tags_to_html
+      |
     = link_to("#{t('comments')}(#{@entry.comments.size})", url("#{@entry.link}#comment"))
     |
     = l(@entry.created_at)

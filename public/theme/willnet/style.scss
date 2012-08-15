@@ -67,4 +67,12 @@ div#info {
 }
 .post_info {
   float: right;
+  ul {
+    display: inline;
+  }
+  li {
+    display: inline;
+    list-style: none;
+    margin-right: 5px;
+  }
 }

@@ -30,6 +30,9 @@
              :"data-width" => "120",
              :"data-show-faces" => "true"}
     .post_info
+      - if post.tags.size > 0
+        = post.tags_to_html
+        |
       = link_to("#{t('comments')}(#{post.comments.size})", url("#{post.link}#comment"))
       |
       = l(post.created_at)
