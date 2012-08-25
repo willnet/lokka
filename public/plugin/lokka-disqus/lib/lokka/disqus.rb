@@ -2,7 +2,7 @@ module Lokka
   module Disqus
     def self.registered(app)
       app.get '/admin/plugins/disqus' do
-        haml :"plugin/lokka-disqus/views/index", :layout => :"admin/admin_layout"
+        haml :"plugin/lokka-disqus/views/index", :layout => :"admin/layout"
       end
 
       app.put '/admin/plugins/disqus' do
