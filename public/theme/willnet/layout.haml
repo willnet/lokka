@@ -5,6 +5,8 @@
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
     - if entry?
       %title= "#{@entry.title} - #{@site.title}"
+    - elsif @bread_crumbs[0..-2].present?
+      %title= "#{@bread_crumbs[-1][:name]} - #{@site.title}"
     - else
       %title= @site.title
     %link{rel: "alternate", href: "/index.atom", type: "application/atom+xml"}
