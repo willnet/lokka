@@ -8,7 +8,7 @@
     - elsif @bread_crumbs[0..-2].present?
       %title= "#{@bread_crumbs[-1][:name]} - #{@site.title}"
     - else
-      %title= @site.title
+      %title= "おもしろwebサービス開発日記 - #{@site.title}"
     %link{rel: "alternate", href: "/index.atom", type: "application/atom+xml"}
     %link{rel: "shortcut icon", href: "#{@theme.path}/favicon.ico"}
     %link{rel: "stylesheet", href: "#{@theme.path}/css/bootstrap.css"}
