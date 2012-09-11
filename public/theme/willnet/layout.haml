@@ -40,7 +40,7 @@
             %form.navbar-search{class: 'pull-right', action: "/search/", method: "get"}
               %input.search-query{type: "text", name: "query", placeholder: "search"}
             %ul.nav
-              - Page.all.each do |page|
+              - Page.all.reverse.each do |page|
                 - if page.link == request_path
                   %li.active= link_to(page.title, page.link)
                 - else
