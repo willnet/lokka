@@ -37,7 +37,7 @@
             %span.icon-bar
           %a.brand{href: '/'}= @site.title
           .nav-collapse
-            %form.navbar-search{class: 'pull-right', action: "/search/", method: "get"}
+            %form.navbar-search.pull-right{ action: "/search/", method: "get"}
               %input.search-query{type: "text", name: "query", placeholder: "search"}
             %ul.nav
               - Page.all.reverse.each do |page|
