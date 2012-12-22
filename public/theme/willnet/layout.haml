@@ -3,18 +3,27 @@
   %head
     %meta{charset: "UTF-8"}
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
-    - if entry?
-      %title= "#{@entry.title} - #{@site.title}"
+    - title = if entry?
+      - "#{@entry.title} - #{@site.title}"
     - elsif @bread_crumbs[0..-2].present?
-      %title= "#{@bread_crumbs[-1][:name]} - #{@site.title}"
+      - "#{@bread_crumbs[-1][:name]} - #{@site.title}"
     - else
-      %title= "おもしろwebサービス開発日記 - #{@site.title}"
+      - "おもしろwebサービス開発日記 - #{@site.title}"
+    %title= title
+    %meta{proparty: "og:title", conetnt: "#{title}"}
+    %meta{proparty: "og:type", conetnt: "blog"}
+    %meta{proparty: "og:site_name", conetnt: "おもしろwebサービス開発日記"}
+    %meta{proparty: "og:site_url", conetnt: "http://willnet.in/"}
+    %meta{proparty: "og:image", conetnt: "http://www.gravatar.com/avatar/6ac7c50770603b53964d44db373e8e48?s=150"}
+    - path = entry? ? "/#{@entry.fuzzy_slug}" : request_path
+    %meta{proparty: "og:url", conetnt: "http://willnet.in#{path}"}
     %link{rel: "alternate", href: "/index.atom", type: "application/atom+xml"}
     %link{rel: "shortcut icon", href: "#{@theme.path}/favicon.ico"}
     %link{rel: "stylesheet", href: "#{@theme.path}/css/bootstrap.css"}
     %link{rel: "stylesheet", href: "#{@theme.path}/style.css"}
     %link{rel: "stylesheet", href: "#{@theme.path}/css/bootstrap-responsive.css"}
     %link{rel: "stylesheet", href: "#{@theme.path}/style-responsive.css"}
+    %link{rel: "author", href: "https://plus.google.com/110960561695652777519"}
     %script{src: "//s.hatena.ne.jp/js/HatenaStar.js"}
     %script{src: "#{@theme.path}/js/hatena_star.js"}
     = header
