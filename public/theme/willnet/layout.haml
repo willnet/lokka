@@ -12,7 +12,7 @@
     %title= title
     %meta{property: "og:title", content: "#{title}"}
     %meta{property: "og:type", content: "blog"}
-    %meta{property: "og:description", content: '世界的webサービスを作るまで'}
+    %meta{property: "og:description", content: entry? ? "#{h(strip_lfs(strip_tags(@entry.body)[0..100]))}..." : '世界的webサービスを作るまで'}
     %meta{property: "og:site_name", content: "おもしろwebサービス開発日記"}
     %meta{property: "og:image", content: "http://www.gravatar.com/avatar/6ac7c50770603b53964d44db373e8e48?s=200"}
     - path = entry? ? "/#{@entry.fuzzy_slug}" : request_path

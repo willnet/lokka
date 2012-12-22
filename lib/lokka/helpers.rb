@@ -371,5 +371,13 @@ module Lokka
     def body_attrs
       {:class => slugs.join(' ')}
     end
+
+    def strip_tags(str)
+      str.gsub(/<\/?[^>]*>/, "")
+    end
+
+    def strip_lfs(str)
+      str.gsub("\n", '')
+    end
   end
 end
