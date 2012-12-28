@@ -150,3 +150,7 @@ require 'lokka/before'
 require 'lokka/helpers'
 require 'lokka/render_helper'
 require 'lokka/app'
+
+if Lokka.production?
+  require 'newrelic_rpm'
+end

@@ -91,6 +91,7 @@ GEM
     kramdown (0.13.7)
     method_source (0.8)
     multi_json (1.0.4)
+    newrelic_rpm (3.5.4.34)
     nokogiri (1.5.5)
     padrino-core (0.10.5)
       activesupport (~> 3.1.0)
@@ -206,6 +207,7 @@ DEPENDENCIES
   haml (~> 3.1.1)
   i18n (= 0.6.0)
   kramdown
+  newrelic_rpm
   nokogiri (~> 1.5.2)
   padrino-helpers (= 0.10.5)
   pry
