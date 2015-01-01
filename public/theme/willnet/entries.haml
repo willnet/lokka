@@ -14,7 +14,7 @@
            :"data-hatena-bookmark-layout" => "standard",
            :title => "このエントリーをはてなブックマークに追加"}
           %img{:src => "http://b.st-hatena.com/images/entry-button/button-only.gif", :alt => "このエントリーをはてなブックマークに追加", :width => "20", :height => "20", :style => "border: none;"}
-      .twitter      
+      .twitter
         %a{:href => "https://twitter.com/share",
            :class => "twitter-share-button",
            :"data-url" => "http://willnet.in#{post.link}",
@@ -36,12 +36,17 @@
       = comments_link(post.id, post.link)
       |
       = l(post.created_at)
-.pager
-  - if @posts.pager.previous_page
-    %span.previous
-      %a{:href => "?page=#{@posts.pager.previous_page}"}
-        Newer
-  - if @posts.pager.next_page
-    %span.next
-      %a{:href => "?page=#{@posts.pager.next_page}"}
-        Older
+%nav
+  %ul.pager
+    - if @posts.pager.previous_page
+      %li.next
+        %a{:href => "?page=#{@posts.pager.previous_page}"}
+          Newer
+          %span{ "aria-hidden" => "true" }
+            &rarr;
+    - if @posts.pager.next_page
+      %li.previous
+        %a{:href => "?page=#{@posts.pager.next_page}"}
+          %span{ "aria-hidden" => "true" }
+            &larr;
+          Older

@@ -21,10 +21,9 @@
     %meta{property: "fb:app_id", content: "278816705549331" }
     %link{rel: "alternate", href: "/index.atom", type: "application/atom+xml"}
     %link{rel: "shortcut icon", href: "#{@theme.path}/favicon.ico"}
-    %link{rel: "stylesheet", href: "#{@theme.path}/css/bootstrap.css"}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
     %link{rel: "stylesheet", href: "#{@theme.path}/style.css"}
-    %link{rel: "stylesheet", href: "#{@theme.path}/css/bootstrap-responsive.css"}
-    %link{rel: "stylesheet", href: "#{@theme.path}/style-responsive.css"}
     %link{rel: "author", href: "https://plus.google.com/110960561695652777519"}
     %script{src: "//s.hatena.ne.jp/js/HatenaStar.js"}
     %script{src: "#{@theme.path}/js/hatena_star.js"}
@@ -39,39 +38,44 @@
       js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=278816705549331";
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          %a.btn.btn-navbar{'data-toggle' => "collapse", 'data-target' => ".nav-collapse"}
+    %header.navbar.navbar-default.navbar-static-top{:role => "navigation"}
+      .container
+        .navbar-header
+          %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand{href: '/'}= @site.title
-          .nav-collapse
-            %form.navbar-search.pull-right{ action: "/search/", method: "get"}
-              %input.search-query{type: "text", name: "query", placeholder: "search"}
-            %ul.nav
-              - Page.all.reverse.each do |page|
-                - if page.link == request_path
-                  %li.active= link_to(page.title, page.link)
-                - else
-                  %li= link_to(page.title, page.link)
-              %li
-                %a{href: 'http://github.com/willnet'} github
-              %li
-                %a{href: 'http://twitter.com/netwillnet'} twitter
-              %li
-                %a{href: 'https://www.facebook.com/netwillnet'} facebook
-              %li
-                %a{href: 'https://plus.google.com/110960561695652777519?rel=author'} Google
-                
+          %a.navbar-brand{href: '/'}= @site.title
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            - Page.all.reverse.each do |page|
+              - if page.link == request_path
+                %li.active= link_to(page.title, page.link)
+              - else
+                %li= link_to(page.title, page.link)
+            %li
+              %a{href: 'http://github.com/willnet'} github
+            %li
+              %a{href: 'http://twitter.com/netwillnet'} twitter
+            %li
+              %a{href: 'https://www.facebook.com/netwillnet'} facebook
+            %li
+              %a{href: 'https://plus.google.com/110960561695652777519?rel=author'} Google
+          %form.navbar-form.navbar-right{ action: "/search/", method: "get"}
+            .form-group
+              .input-group
+                %input.form-control{type: "search", name: "query", placeholder: "search"}
+                %span.input-group-btn
+                  %button.btn.btn-default
+                    %span.glyphicon.glyphicon-search
     .container
       .row
-        .span9
+        .col-sm-9
           = yield
-        .span3
+        .col-sm-3
           #info
-            %img{src: 'http://www.gravatar.com/avatar/6ac7c50770603b53964d44db373e8e48?s=150'}
+            %img.img-rounded{src: 'http://www.gravatar.com/avatar/6ac7c50770603b53964d44db373e8e48?s=150'}
             %p= @site.description
           :javascript
             google_ad_client = "ca-pub-9595778255945158";
@@ -109,7 +113,7 @@
     %script{src: "//b.st-hatena.com/js/bookmark_button.js", charset: "utf-8", async: "async"}
     :javascript
       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-    %script{src: "#{@theme.path}/js/jquery-1.7.2.min.js"}
-    %script{src: "#{@theme.path}/js/bootstrap.min.js"}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     %script{src: "#{@theme.path}/js/design.js"}
     = footer
