@@ -42,6 +42,7 @@ gem 'newrelic_rpm'
 gem 'coffee-script'
 gem 'therubyracer'
 gem 'libv8', '3.16.14.7'
+gem 'passenger', '5.0.0.rc2'
 
 Dir["public/plugin/lokka-*/Gemfile"].each {|path| eval(open(path) {|f| f.read }) }
 
