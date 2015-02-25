@@ -1,0 +1,21 @@
+deployment:
+  production:
+    branch: master
+    commands:
+      - heroku maintenance:on --app savanna
+      - git push git@heroku.com:willnet-lokka-ceder.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app willnet-lokka-ceder:
+          timeout: 400 # if your deploys take a long time
+      - heroku maintenance:off --app willnet-lokka-ceder
+
+machine:
+  ruby:
+    version: 2.1.5
+
+test:
+  override:
+    - bundle exec rake spec
+
+notify:
+  webhooks:
+    - url: https://idobata.io/hook/circle_ci/debc5621-f694-47bf-8f52-01aafec16b1d
