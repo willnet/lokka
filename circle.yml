@@ -2,7 +2,7 @@ deployment:
   production:
     branch: master
     commands:
-      - heroku maintenance:on --app savanna
+      - heroku maintenance:on --app willnet-lokka-ceder
       - git push git@heroku.com:willnet-lokka-ceder.git $CIRCLE_SHA1:refs/heads/master
       - heroku run rake db:migrate --app willnet-lokka-ceder:
           timeout: 400 # if your deploys take a long time
