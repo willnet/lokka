@@ -14,7 +14,7 @@ machine:
 
 test:
   override:
-    - bundle exec rake spec
+    - bundle exec rake
 
 notify:
   webhooks:
