@@ -124,7 +124,7 @@ GEM
     padrino-helpers (0.11.2)
       i18n (~> 0.6)
       padrino-core (= 0.11.2)
-    passenger (5.0.4)
+    passenger (5.0.11)
       rack
       rake (>= 0.8.1)
     pry (0.9.12.6)
@@ -134,7 +134,7 @@ GEM
     pry-remote (0.1.8)
       pry (~> 0.9)
       slop (~> 3.0)
-    rack (1.6.0)
+    rack (1.6.4)
     rack-flash (0.1.2)
       rack
     rack-protection (1.5.3)
@@ -244,7 +244,7 @@ DEPENDENCIES
   newrelic_rpm
   nokogiri (~> 1.5.2)
   padrino-helpers (= 0.11.2)
-  passenger (= 5.0.4)
+  passenger (= 5.0.11)
   pry
   pry-remote
   rack
