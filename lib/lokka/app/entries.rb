@@ -131,11 +131,7 @@ module Lokka
       @entry = Entry.get_by_fuzzy_slug(id_or_slug)
 
       return 404 if @entry.blank?
-      redirect to(@entry.link) if @entry.type == Post && custom_permalink?
-
-      @comment = @entry.comments.new
-
-      setup_and_render_entry
+      redirect to("http://blog.willnet.in/entry/#{@entry.created_at.strftime('%Y/%m/%d/%H%M%S')}", 301)
     end
 
     # comment
