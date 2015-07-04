@@ -12,7 +12,7 @@
          :"data-hatena-bookmark-layout" => "standard",
          :title => "このエントリーをはてなブックマークに追加"}
         %img{:src => "http://b.st-hatena.com/images/entry-button/button-only.gif", :alt => "このエントリーをはてなブックマークに追加", :width => "20", :height => "20", :style => "border: none;"}
-    .twitter      
+    .twitter
       %a{:href => "https://twitter.com/share",
          :class => "twitter-share-button",
          :"data-url" => "http://willnet.in#{@entry.link}",
@@ -32,12 +32,8 @@
       = @entry.tags_to_html
       |
     = l(@entry.created_at)
-  :javascript
-    google_ad_client = "ca-pub-9595778255945158";
-    /* willnet-under-article */
-    google_ad_slot = "1186506590";
-    google_ad_width = 728;
-    google_ad_height = 90;
-  %script{src:"http://pagead2.googlesyndication.com/pagead/show_ads.js"}
-  = comment_form 
-
+  .well
+    もしこの記事が参考になって、寄付をしたいと思ったら
+    %a{ href: 'http://www.amazon.co.jp/registry/wishlist/3MLJ4E78LB09E' } こちらから
+    寄付をお願いします (\( ⁰⊖⁰)/)
+  = comment_form

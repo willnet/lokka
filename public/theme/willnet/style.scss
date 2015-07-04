@@ -1,3 +1,7 @@
+.page-header {
+  margin: 20px 0 20px;
+}
+
 div.pager {
   margin: 20px 0;
 }
@@ -14,26 +18,8 @@ article {
   margin: 15px 0;
 }
 
-.navbar {
-  .brand {
-    padding: 8px 20px 12px 0px;
-  }
-  .container {
-    .brand {
-      margin: 5px 0;
-    }
-    form.navbar-search {
-      margin-top: 10px;
-    }
-    li {
-      margin: 5px 0;
-    }
-  }
-}
-
 body {
   font-family: Lucida Grande,Lucida Sans Unicode;
-  padding-top: 45px;
 }
 
 div#info {
