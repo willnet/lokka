@@ -1,119 +1,406 @@
 !!!
-%html{lang: "ja"}
+%html{:lang => "en"}
   %head
-    %meta{charset: "UTF-8"}
-    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
-    - title = if entry?
-      - "#{@entry.title} - #{@site.title}"
-    - elsif @bread_crumbs[0..-2].present?
-      - "#{@bread_crumbs[-1][:name]} - #{@site.title}"
-    - else
-      - "おもしろwebサービス開発日記 - #{@site.title}"
-    %title= title
-    %meta{property: "og:title", content: "#{title}"}
-    %meta{property: "og:type", content: "blog"}
-    %meta{property: "og:description", content: entry? ? "#{h(strip_lfs(strip_tags(@entry.body)[0..100]))}..." : '世界的webサービスを作るまで'}
-    %meta{property: "og:site_name", content: "おもしろwebサービス開発日記"}
-    %meta{property: "og:image", content: "http://www.gravatar.com/avatar/6ac7c50770603b53964d44db373e8e48?s=200"}
-    - path = entry? ? "/#{@entry.fuzzy_slug}" : request_path
-    %meta{property: "og:url", content: "http://willnet.in#{path}"}
-    %meta{property: "fb:admins", content: "1033476295" }
-    %meta{property: "fb:app_id", content: "278816705549331" }
-    %link{rel: "alternate", href: "/index.atom", type: "application/atom+xml"}
-    %link{rel: "shortcut icon", href: "#{@theme.path}/favicon.ico"}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-    %link{rel: "stylesheet", href: "#{@theme.path}/style.css"}
-    %link{rel: "author", href: "https://plus.google.com/110960561695652777519"}
-    %script{src: "//s.hatena.ne.jp/js/HatenaStar.js"}
-    %script{src: "#{@theme.path}/js/hatena_star.js"}
-    = header
-  %body
-    #fb-root
-    :javascript
-      (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=278816705549331";
-      fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    %header.navbar.navbar-default.navbar-static-top{:role => "navigation"}
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %title Freelancer - Start Bootstrap Theme
+    / Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Custom CSS
+    %link{:href => "css/freelancer.css", :rel => "stylesheet"}/
+    / Custom Fonts
+    %link{:href => "font-awesome/css/font-awesome.min.css", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "http://fonts.googleapis.com/css?family=Montserrat:400,700", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic", :rel => "stylesheet", :type => "text/css"}/
+    / HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    / WARNING: Respond.js doesn't work if you view the page via file://
+    /[if lt IE 9]
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  %body#page-top.index
+    / Navigation
+    %nav.navbar.navbar-default.navbar-fixed-top
       .container
-        .navbar-header
-          %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+        / Brand and toggle get grouped for better mobile display
+        .navbar-header.page-scroll
+          %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
             %span.sr-only Toggle navigation
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.navbar-brand{href: '/'}= @site.title
+          %a.navbar-brand{:href => "#page-top"} Start Bootstrap
+        / Collect the nav links, forms, and other content for toggling
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          %ul.nav.navbar-nav
-            - Page.all.reverse.each do |page|
-              - if page.link == request_path
-                %li.active= link_to(page.title, page.link)
-              - else
-                %li= link_to(page.title, page.link)
-            %li
-              %a{href: 'http://github.com/willnet'} github
-            %li
-              %a{href: 'http://twitter.com/netwillnet'} twitter
-            %li
-              %a{href: 'https://www.facebook.com/netwillnet'} facebook
-            %li
-              %a{href: 'https://plus.google.com/110960561695652777519?rel=author'} Google
-          %form.navbar-form.navbar-right{ action: "/search/", method: "get"}
-            .form-group
-              .input-group
-                %input.form-control{type: "search", name: "query", placeholder: "search"}
-                %span.input-group-btn
-                  %button.btn.btn-default
-                    %span.glyphicon.glyphicon-search
-    .container
-      .row
-        .col-sm-9
-          = yield
-        .col-sm-3
-          #info
-            %img.img-rounded{src: 'http://www.gravatar.com/avatar/6ac7c50770603b53964d44db373e8e48?s=150'}
-            %p= @site.description
-          :javascript
-            google_ad_client = "ca-pub-9595778255945158";
-            /* square250 */
-            google_ad_slot = "5118052670";
-            google_ad_width = 250;
-            google_ad_height = 250;
-          %script{src: "http://pagead2.googlesyndication.com/pagead/show_ads.js"}
-          %h2 別のブログ
-          %ul
-            %li
-              %a{href: 'http://memo.willnet.in/'}
-                技術メモブログ
-            %li
-              %a{href: 'http://private.willnet.in/'}
-                技術以外のブログ
-          %h2 最近のエントリ
-          %ul
-            - Post.recent(5).each do |post|
-              %li
-                %a{href: post.link}
-                  = post.title
-          %h2 タグ
-          %ul.nav.nav-pills
-            - Tag.all.sort_by(&:name).each do |tag|
-              %li
-                %a{href: tag.link}
-                  = tag.name
-          %h2 アーカイブ
-          %ul
-            - months.each do |month|
-              %li
-                %a{href: "/#{month.year}/#{month.month}/"}
-                  = "#{month.year}/#{month.month}"
-    %script{src: "//b.st-hatena.com/js/bookmark_button.js", charset: "utf-8", async: "async"}
-    :javascript
-      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    %script{src: "#{@theme.path}/js/design.js"}
-    = footer
+          %ul.nav.navbar-nav.navbar-right
+            %li.hidden
+              %a{:href => "#page-top"}
+            %li.page-scroll
+              %a{:href => "#portfolio"} Portfolio
+            %li.page-scroll
+              %a{:href => "#about"} About
+            %li.page-scroll
+              %a{:href => "#contact"} Contact
+        / /.navbar-collapse
+      / /.container-fluid
+    / Header
+    %header
+      .container
+        .row
+          .col-lg-12
+            %img.img-responsive{:alt => "", :src => "img/profile.png"}/
+            .intro-text
+              %span.name Start Bootstrap
+              %hr.star-light/
+              %span.skills Web Developer - Graphic Artist - User Experience Designer
+    / Portfolio Grid Section
+    %section#portfolio
+      .container
+        .row
+          .col-lg-12.text-center
+            %h2 Portfolio
+            %hr.star-primary/
+        .row
+          .col-sm-4.portfolio-item
+            %a.portfolio-link{"data-toggle" => "modal", :href => "#portfolioModal1"}
+              .caption
+                .caption-content
+                  %i.fa.fa-search-plus.fa-3x
+              %img.img-responsive{:alt => "", :src => "img/portfolio/cabin.png"}/
+          .col-sm-4.portfolio-item
+            %a.portfolio-link{"data-toggle" => "modal", :href => "#portfolioModal2"}
+              .caption
+                .caption-content
+                  %i.fa.fa-search-plus.fa-3x
+              %img.img-responsive{:alt => "", :src => "img/portfolio/cake.png"}/
+          .col-sm-4.portfolio-item
+            %a.portfolio-link{"data-toggle" => "modal", :href => "#portfolioModal3"}
+              .caption
+                .caption-content
+                  %i.fa.fa-search-plus.fa-3x
+              %img.img-responsive{:alt => "", :src => "img/portfolio/circus.png"}/
+          .col-sm-4.portfolio-item
+            %a.portfolio-link{"data-toggle" => "modal", :href => "#portfolioModal4"}
+              .caption
+                .caption-content
+                  %i.fa.fa-search-plus.fa-3x
+              %img.img-responsive{:alt => "", :src => "img/portfolio/game.png"}/
+          .col-sm-4.portfolio-item
+            %a.portfolio-link{"data-toggle" => "modal", :href => "#portfolioModal5"}
+              .caption
+                .caption-content
+                  %i.fa.fa-search-plus.fa-3x
+              %img.img-responsive{:alt => "", :src => "img/portfolio/safe.png"}/
+          .col-sm-4.portfolio-item
+            %a.portfolio-link{"data-toggle" => "modal", :href => "#portfolioModal6"}
+              .caption
+                .caption-content
+                  %i.fa.fa-search-plus.fa-3x
+              %img.img-responsive{:alt => "", :src => "img/portfolio/submarine.png"}/
+    / About Section
+    %section#about.success
+      .container
+        .row
+          .col-lg-12.text-center
+            %h2 About
+            %hr.star-light/
+        .row
+          .col-lg-4.col-lg-offset-2
+            %p Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.
+          .col-lg-4
+            %p Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!
+          .col-lg-8.col-lg-offset-2.text-center
+            %a.btn.btn-lg.btn-outline{:href => "#"}
+              %i.fa.fa-download
+              Download Theme
+    / Contact Section
+    %section#contact
+      .container
+        .row
+          .col-lg-12.text-center
+            = yield
+            %h2 Contact Me
+            %hr.star-primary/
+        .row
+          .col-lg-8.col-lg-offset-2
+            / To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.
+            / The form should work on most web servers, but if the form is not working you may need to configure your web server differently.
+            %form#contactForm{:name => "sentMessage", :novalidate => ""}
+              .row.control-group
+                .form-group.col-xs-12.floating-label-form-group.controls
+                  %label Name
+                  %input#name.form-control{"data-validation-required-message" => "Please enter your name.", :placeholder => "Name", :required => "", :type => "text"}/
+                  %p.help-block.text-danger
+              .row.control-group
+                .form-group.col-xs-12.floating-label-form-group.controls
+                  %label Email Address
+                  %input#email.form-control{"data-validation-required-message" => "Please enter your email address.", :placeholder => "Email Address", :required => "", :type => "email"}/
+                  %p.help-block.text-danger
+              .row.control-group
+                .form-group.col-xs-12.floating-label-form-group.controls
+                  %label Phone Number
+                  %input#phone.form-control{"data-validation-required-message" => "Please enter your phone number.", :placeholder => "Phone Number", :required => "", :type => "tel"}/
+                  %p.help-block.text-danger
+              .row.control-group
+                .form-group.col-xs-12.floating-label-form-group.controls
+                  %label Message
+                  %textarea#message.form-control{"data-validation-required-message" => "Please enter a message.", :placeholder => "Message", :required => "", :rows => "5"}
+                  %p.help-block.text-danger
+              %br/
+              #success
+              .row
+                .form-group.col-xs-12
+                  %button.btn.btn-success.btn-lg{:type => "submit"} Send
+    / Footer
+    %footer.text-center
+      .footer-above
+        .container
+          .row
+            .footer-col.col-md-4
+              %h3 Location
+              %p
+                3481 Melrose Place
+                %br>/
+                Beverly Hills, CA 90210
+            .footer-col.col-md-4
+              %h3 Around the Web
+              %ul.list-inline
+                %li
+                  %a.btn-social.btn-outline{:href => "#"}
+                    %i.fa.fa-fw.fa-facebook
+                %li
+                  %a.btn-social.btn-outline{:href => "#"}
+                    %i.fa.fa-fw.fa-google-plus
+                %li
+                  %a.btn-social.btn-outline{:href => "#"}
+                    %i.fa.fa-fw.fa-twitter
+                %li
+                  %a.btn-social.btn-outline{:href => "#"}
+                    %i.fa.fa-fw.fa-linkedin
+                %li
+                  %a.btn-social.btn-outline{:href => "#"}
+                    %i.fa.fa-fw.fa-dribbble
+            .footer-col.col-md-4
+              %h3 About Freelancer
+              %p
+                Freelance is a free to use, open source Bootstrap theme created by
+                = succeed "." do
+                  %a{:href => "http://startbootstrap.com"} Start Bootstrap
+      .footer-below
+        .container
+          .row
+            .col-lg-12
+              Copyright © Your Website 2014
+    / Scroll to Top Button (Only visible on small and extra-small screen sizes)
+    .scroll-top.page-scroll.visible-xs.visible-sm
+      %a.btn.btn-primary{:href => "#page-top"}
+        %i.fa.fa-chevron-up
+    / Portfolio Modals
+    #portfolioModal1.portfolio-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+      .modal-content
+        .close-modal{"data-dismiss" => "modal"}
+          .lr
+            .rl
+        .container
+          .row
+            .col-lg-8.col-lg-offset-2
+              .modal-body
+                %h2 Project Title
+                %hr.star-primary/
+                %img.img-responsive.img-centered{:alt => "", :src => "img/portfolio/cabin.png"}/
+                %p
+                  Use this area of the page to describe your project. The icon above is part of a free icon set by
+                  = succeed "." do
+                    %a{:href => "https://sellfy.com/p/8Q9P/jV3VZ/"} Flat Icons
+                %ul.list-inline.item-details
+                  %li
+                    Client:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} Start Bootstrap
+                  %li
+                    Date:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} April 2014
+                  %li
+                    Service:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} Web Development
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}
+                  %i.fa.fa-times
+                  Close
+    #portfolioModal2.portfolio-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+      .modal-content
+        .close-modal{"data-dismiss" => "modal"}
+          .lr
+            .rl
+        .container
+          .row
+            .col-lg-8.col-lg-offset-2
+              .modal-body
+                %h2 Project Title
+                %hr.star-primary/
+                %img.img-responsive.img-centered{:alt => "", :src => "img/portfolio/cake.png"}/
+                %p
+                  Use this area of the page to describe your project. The icon above is part of a free icon set by
+                  = succeed "." do
+                    %a{:href => "https://sellfy.com/p/8Q9P/jV3VZ/"} Flat Icons
+                %ul.list-inline.item-details
+                  %li
+                    Client:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} Start Bootstrap
+                  %li
+                    Date:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} April 2014
+                  %li
+                    Service:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} Web Development
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}
+                  %i.fa.fa-times
+                  Close
+    #portfolioModal3.portfolio-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+      .modal-content
+        .close-modal{"data-dismiss" => "modal"}
+          .lr
+            .rl
+        .container
+          .row
+            .col-lg-8.col-lg-offset-2
+              .modal-body
+                %h2 Project Title
+                %hr.star-primary/
+                %img.img-responsive.img-centered{:alt => "", :src => "img/portfolio/circus.png"}/
+                %p
+                  Use this area of the page to describe your project. The icon above is part of a free icon set by
+                  = succeed "." do
+                    %a{:href => "https://sellfy.com/p/8Q9P/jV3VZ/"} Flat Icons
+                %ul.list-inline.item-details
+                  %li
+                    Client:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} Start Bootstrap
+                  %li
+                    Date:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} April 2014
+                  %li
+                    Service:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} Web Development
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}
+                  %i.fa.fa-times
+                  Close
+    #portfolioModal4.portfolio-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+      .modal-content
+        .close-modal{"data-dismiss" => "modal"}
+          .lr
+            .rl
+        .container
+          .row
+            .col-lg-8.col-lg-offset-2
+              .modal-body
+                %h2 Project Title
+                %hr.star-primary/
+                %img.img-responsive.img-centered{:alt => "", :src => "img/portfolio/game.png"}/
+                %p
+                  Use this area of the page to describe your project. The icon above is part of a free icon set by
+                  = succeed "." do
+                    %a{:href => "https://sellfy.com/p/8Q9P/jV3VZ/"} Flat Icons
+                %ul.list-inline.item-details
+                  %li
+                    Client:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} Start Bootstrap
+                  %li
+                    Date:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} April 2014
+                  %li
+                    Service:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} Web Development
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}
+                  %i.fa.fa-times
+                  Close
+    #portfolioModal5.portfolio-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+      .modal-content
+        .close-modal{"data-dismiss" => "modal"}
+          .lr
+            .rl
+        .container
+          .row
+            .col-lg-8.col-lg-offset-2
+              .modal-body
+                %h2 Project Title
+                %hr.star-primary/
+                %img.img-responsive.img-centered{:alt => "", :src => "img/portfolio/safe.png"}/
+                %p
+                  Use this area of the page to describe your project. The icon above is part of a free icon set by
+                  = succeed "." do
+                    %a{:href => "https://sellfy.com/p/8Q9P/jV3VZ/"} Flat Icons
+                %ul.list-inline.item-details
+                  %li
+                    Client:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} Start Bootstrap
+                  %li
+                    Date:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} April 2014
+                  %li
+                    Service:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} Web Development
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}
+                  %i.fa.fa-times
+                  Close
+    #portfolioModal6.portfolio-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+      .modal-content
+        .close-modal{"data-dismiss" => "modal"}
+          .lr
+            .rl
+        .container
+          .row
+            .col-lg-8.col-lg-offset-2
+              .modal-body
+                %h2 Project Title
+                %hr.star-primary/
+                %img.img-responsive.img-centered{:alt => "", :src => "img/portfolio/submarine.png"}/
+                %p
+                  Use this area of the page to describe your project. The icon above is part of a free icon set by
+                  = succeed "." do
+                    %a{:href => "https://sellfy.com/p/8Q9P/jV3VZ/"} Flat Icons
+                %ul.list-inline.item-details
+                  %li
+                    Client:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} Start Bootstrap
+                  %li
+                    Date:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} April 2014
+                  %li
+                    Service:
+                    %strong
+                      %a{:href => "http://startbootstrap.com"} Web Development
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}
+                  %i.fa.fa-times
+                  Close
+    / jQuery
+    %script{:src => "js/jquery.js"}
+    / Bootstrap Core JavaScript
+    %script{:src => "js/bootstrap.min.js"}
+    / Plugin JavaScript
+    %script{:src => "http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"}
+    %script{:src => "js/classie.js"}
+    %script{:src => "js/cbpAnimatedHeader.js"}
+    / Contact Form JavaScript
+    %script{:src => "js/jqBootstrapValidation.js"}
+    %script{:src => "js/contact_me.js"}
+    / Custom Theme JavaScript
+    %script{:src => "js/freelancer.js"}

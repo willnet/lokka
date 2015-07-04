@@ -4,24 +4,11 @@ module Lokka
     get '/' do
       @theme_types << :index
       @theme_types << :entries
-
-      @posts = Post.published.
-                    page(params[:page], :per_page => @site.per_page, :order => @site.default_order_query_operator)
-      @posts = apply_continue_reading(@posts)
-
-      @title = @site.title
-
-      @bread_crumbs = [{:name => t('home'), :link => '/'}]
-
       render_detect :index, :entries
     end
 
     get '/index.atom' do
-      @posts = Post.published.
-                    page(params[:page], :per_page => @site.per_page, :order => @site.default_order_query_operator)
-      @posts = apply_continue_reading(@posts)
-      content_type 'application/atom+xml', :charset => 'utf-8'
-      builder :'lokka/index'
+      redirect to('http://blog.willnet.in/feed')
     end
 
     # search
@@ -131,7 +118,11 @@ module Lokka
       @entry = Entry.get_by_fuzzy_slug(id_or_slug)
 
       return 404 if @entry.blank?
-      redirect to("http://blog.willnet.in/entry/#{@entry.created_at.strftime('%Y/%m/%d/%H%M%S')}", 301)
+      redirect to(@entry.link) if @entry.type == Post && custom_permalink?
+
+      @comment = @entry.comments.new
+
+      setup_and_render_entry
     end
 
     # comment
